@@ -1,38 +1,32 @@
 package package;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.block.Block;
+import org.bukkit.Material;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Test extends JavaPlugin {
-
-	private BlockRunnable chestParticles = new BlockRunnable(20, this) {
-
-		@Override
-		protected void start(Block block) {
-
-		}
-
-		@Override
-		protected void tick(Block block) {
-			ParticleEffect.FIREWORKS_SPARK.display(0, 0, 0, 1, 50, block.getLocation(), 5);
-		}
-
-		@Override
-		protected void stop(Block block) {
-		}
-
-	};
-
-	private final Block particleBlock = new Location(Bukkit.getWorld("world"), 1, 2, 3).getBlock();
+public class Test extends JavaPlugin implements Listener {
 
 	public void onEnable() {
-		this.chestParticles.startBlock(this.particleBlock);
+		Bukkit.getServer().getPluginManager().registerEvents(this, this);
 	}
 
-	public void onDisable() {
-		this.chestParticles.stopBlock(this.particleBlock);
+	@EventHandler
+	public void onPlayerJoin(PlayerJoinEvent event) {
+		List<ItemStack> items = new ArrayList<ItemStack>();
+
+		for (int i = 0; i < 100; i++) {
+			items.add(new ItemStack(Material.values()[new Random().nextInt(Material.values().length)]));
+		}
+
+		// Note, the List above "items" is just testing data. Change it to your item list.
+		new Multipage("Pg %page%", items).openInventory(event.getPlayer());
 	}
 
 }
