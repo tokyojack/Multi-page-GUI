@@ -1,4 +1,4 @@
-package com.valeon.core.multipage;
+package package;
 
 import java.util.List;
 
@@ -30,44 +30,9 @@ public class Multipage implements Listener {
 	}
 
 	public Multipage(String inventoryName, List<ItemStack> inventoryItems) {
-		this.inventoryName = inventoryName;
-		this.nextButton = MultipageManager.DEFAULT_NEXT_BUTTON;
-		this.backButton = MultipageManager.DEFAULT_BACK_BUTTON;
-		this.noValuesItem = MultipageManager.DEFAULT_NO_ITEMS;
-		this.inventoryItems = inventoryItems;
-
-		MultipageManager.getInstance().getMultipages().put(this.inventoryName, this);
+		this(inventoryName, MultipageManager.DEFAULT_NEXT_BUTTON, MultipageManager.DEFAULT_BACK_BUTTON, MultipageManager.DEFAULT_NO_ITEMS, inventoryItems);
 	}
 
-	public Multipage(String inventoryName, List<ItemStack> inventoryItems, Player openInvToPlayer) {
-		this(inventoryName, inventoryItems);
-
-		MultipageManager.getInstance().getMultipages().put(this.inventoryName, this);
-		openInventory(openInvToPlayer);
-	}
-
-	public Multipage(String inventoryName, ItemStack nextItem, ItemStack backItem, ItemStack noValuesItem,
-			List<ItemStack> inventoryItems, Player openInvToPlayer) {
-		this(inventoryName, nextItem, backItem, noValuesItem, inventoryItems);
-
-		MultipageManager.getInstance().getMultipages().put(this.inventoryName, this);
-		openInventory(openInvToPlayer);
-	}
-
-	public Multipage(String inventoryName, List<ItemStack> inventoryItems, Player openInvToPlayer, int pageToStartAt) {
-		this(inventoryName, inventoryItems);
-
-		MultipageManager.getInstance().getMultipages().put(this.inventoryName, this);
-		openInventory(openInvToPlayer, pageToStartAt);
-	}
-
-	public Multipage(String inventoryName, ItemStack nextItem, ItemStack backitem, ItemStack noValuesItem,
-			List<ItemStack> inventoryItems, Player openInvToPlayer, int pageToStartAt) {
-		this(inventoryName, nextItem, backitem, noValuesItem, inventoryItems);
-
-		MultipageManager.getInstance().getMultipages().put(this.inventoryName, this);
-		openInventory(openInvToPlayer, pageToStartAt);
-	}
 
 	/**
 	 * Opens a multi-page GUI. NOT USED FOR NORMAL USE
