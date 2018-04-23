@@ -69,38 +69,52 @@ public class Multipage implements Listener {
 		openInventory(openInvToPlayer, pageToStartAt);
 	}
 
-	public String getName() {
-		return this.inventoryName;
-	}
-
-	public ItemStack getNextButtonItem() {
-		return this.nextButton;
-	}
-
-	public ItemStack getBackButtonItem() {
-		return this.backButton;
-	}
-
-	public ItemStack getNoValuesItem() {
-		return this.noValuesItem;
-	}
-
-	public List<ItemStack> getAllItems() {
-		return this.inventoryItems;
-	}
-
+	/**
+	 * Opens a multi-page GUI. NOT USED FOR NORMAL USE
+	 *
+	 * @param Player
+	 *            - The player it'll be opened to
+	 * @param int
+	 *            - The page it'll open at
+	 * @param boolean
+	 *            - If the person is opening from another page. You shouldn't use this.
+	 */
 	public void openInventory(Player player, int pageNumber, boolean isReopening) {
 		player.openInventory(createInventory(player, pageNumber, isReopening));
 	}
 
+	/**
+	 * Opens a multi-page GUI
+	 *
+	 * @param Player
+	 *            - The player it'll be opened to
+	 * @param int
+	 *            - The page it'll open at
+	 */
 	public void openInventory(Player player, int pageNumber) {
 		openInventory(player, pageNumber, false);
 	}
 
+	/**
+	 * Opens a multi-page GUI
+	 *
+	 * @param Player
+	 *            - The player it'll be opened to
+	 */
 	public void openInventory(Player player) {
 		openInventory(player, 1, false);
 	}
 
+	/**
+	 * Creates the mutlipage inventory.
+	 *
+	 * @param Player
+	 *            - The player it'll be opened to
+	 * @param int
+	 *            - The page it'll open at
+	 * @param boolean
+	 *            - If the person is opening from another page. You shouldn't use this.
+	 */
 	private Inventory createInventory(Player player, int pageNumber, boolean isReopening) {
 		if (!isReopening)
 			MultipageManager.getInstance().getPlayerPages().remove(player.getName());
@@ -135,6 +149,51 @@ public class Multipage implements Listener {
 		return multipageInventory;
 	}
 
+	/**
+	 * Gets the inventory name
+	 *
+	 * @return String - The inventory name
+	 */
+	public String getName() {
+		return this.inventoryName;
+	}
+
+	/**
+	 * Gets the inventory next button item
+	 *
+	 * @return ItemStack - The next button item
+	 */
+	public ItemStack getNextButtonItem() {
+		return this.nextButton;
+	}
+
+	/**
+	 * Gets the inventory back button item
+	 *
+	 * @return ItemStack - The back button item
+	 */
+	public ItemStack getBackButtonItem() {
+		return this.backButton;
+	}
+
+	/**
+	 * Gets the inventory "no values" item
+	 *
+	 * @return ItemStack - The "no values" item
+	 */
+	public ItemStack getNoValuesItem() {
+		return this.noValuesItem;
+	}
+
+	/**
+	 * Gets all the items in the inventory
+	 *
+	 * @return List<ItemStack> - The items in the inventory
+	 */
+	public List<ItemStack> getAllItems() {
+		return this.inventoryItems;
+	}
+	
 	// Could put in MultipageManager, but it's more clear if you have
 	// "Multipage.register()"
 	// and not

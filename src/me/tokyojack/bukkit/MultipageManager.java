@@ -27,10 +27,20 @@ public class MultipageManager {
 		this.playerPages = new HashMap<String, Integer>();
 	}
 
+	/**
+	 * Gets all the created multipage inventories
+	 *
+	 * @return Map<String, Multipage> - The created multipage inventories
+	 */
 	public Map<String, Multipage> getMultipages() {
 		return this.multipages;
 	}
 
+	/**
+	 * Gets what page the player is on
+	 *
+	 * @return Map<String, Integer> - The map with what page a player is on
+	 */
 	public Map<String, Integer> getPlayerPages() {
 		return this.playerPages;
 	}
@@ -41,16 +51,34 @@ public class MultipageManager {
 		return instance;
 	}
 
-	private static ItemStack createNamedItem(Material mat, String name) {
-		ItemStack item = new ItemStack(mat);
-		ItemMeta itemMeta = item.getItemMeta();
-		itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
-		item.setItemMeta(itemMeta);
-		return item;
+	/**
+	 * Returns an ItemStack with the given arguments
+	 *
+	 * @param Material
+	 *            - The item's material
+	 * @param String
+	 *            - The item's name
+	 *
+	 * @return ItemStack - The created item
+	 */
+	private static ItemStack createNamedItem(Material material, String name) {
+		return createNamedItem(material, name, 0);
 	}
 
-	private static ItemStack createNamedItem(Material mat, int durability, String name) {
-		ItemStack item = new ItemStack(mat, 1, (short) durability);
+	/**
+	 * Returns an ItemStack with the given arguments
+	 *
+	 * @param Material
+	 *            - The item's material
+	 * @param String
+	 *            - The item's name
+	 * @param int
+	 *            - The item's durability
+	 *
+	 * @return ItemStack - The created item
+	 */
+	private static ItemStack createNamedItem(Material material, String name, int durability) {
+		ItemStack item = durability != 0 ? new ItemStack(material, 1, (short) durability) : new ItemStack(material);
 		ItemMeta itemMeta = item.getItemMeta();
 		itemMeta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
 		item.setItemMeta(itemMeta);
